@@ -67,12 +67,28 @@ d3.csv("assets/data/data.csv").then(function(journalData) {
     .data(journalData)
     .enter()
     .append("circle")
-    .text(d => d.abbr)
     .attr("cx", d => xLinearScale(d.poverty))
     .attr("cy", d => yLinearScale(d.healthcare))
-    .attr("r", "15")
+    .attr("r", "10")
     .attr("fill", "blue")
     .attr("opacity", ".25");
+
+    // Add Text to Scatter Plot Circles
+    var circleText = chartGroup.selectAll("text")
+    .data(journalData)
+    .enter()
+    .append("text")
+    .text(d => d.abbr)
+    .attr("x", d => xLinearScale(d.poverty))
+    .attr("y", d => yLinearScale(d.healthcare))
+    .classed(".stateText", true)
+    .attr("font-family", "sans-serif")
+    .attr("text-anchor", "middle")
+    .attr("fill", "white")
+    .attr("font-size", "8px")
+    .style("font-weight", "bold")
+    .attr("alignment-baseline", "central");
+  
 
     // Create axes labels
     chartGroup.append("text")
