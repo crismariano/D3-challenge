@@ -40,7 +40,7 @@ d3.csv("assets/data/data.csv").then(function(journalData) {
     // Step 2: Create scale functions
     // ==============================
     var xLinearScale = d3.scaleLinear()
-      .domain([8, d3.max(journalData, d => d.poverty)])
+      .domain([9, d3.max(journalData, d => d.poverty)])
       .range([0, width]);
 
     var yLinearScale = d3.scaleLinear()
@@ -74,7 +74,7 @@ d3.csv("assets/data/data.csv").then(function(journalData) {
     .attr("opacity", ".25");
 
     // Add Text to Scatter Plot Circles
-    var circleText = chartGroup.selectAll("text")
+    var circleText = chartGroup.selectAll(".stateText")
     .data(journalData)
     .enter()
     .append("text")
@@ -84,11 +84,10 @@ d3.csv("assets/data/data.csv").then(function(journalData) {
     .classed(".stateText", true)
     .attr("font-family", "sans-serif")
     .attr("text-anchor", "middle")
-    .attr("fill", "white")
+    .attr("fill", "black")
     .attr("font-size", "8px")
+    .attr("alignment-baseline", "central")
     .style("font-weight", "bold")
-    .attr("alignment-baseline", "central");
-  
 
     // Create axes labels
     chartGroup.append("text")
