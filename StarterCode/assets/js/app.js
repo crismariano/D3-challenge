@@ -29,10 +29,13 @@ d3.csv("assets/data/data.csv").then(function(journalData) {
     // ==============================
     journalData.forEach(function(data) {
       data.poverty = +data.poverty;
+      data.income = +data.income
       data.age = +data.age;
       data.healthcare = +data.healthcare;
+      data.obesity = +data.obesity;
       data.smokes = +data.smokes;
     });
+
 
     // Step 2: Create scale functions
     // ==============================
@@ -64,34 +67,12 @@ d3.csv("assets/data/data.csv").then(function(journalData) {
     .data(journalData)
     .enter()
     .append("circle")
+    .text(d => d.abbr)
     .attr("cx", d => xLinearScale(d.poverty))
     .attr("cy", d => yLinearScale(d.healthcare))
     .attr("r", "15")
-    .attr("fill", "pink")
-    .attr("opacity", ".5");
-
-    // Step 6: Initialize tool tip
-    // ==============================
-    //var toolTip = d3.tip()
-    //  .attr("class", "tooltip")
-    //  .offset([80, -60])
-    //  .html(function(d) {
-    //    return (`${d.state}<br>Poverty: ${d.poverty}<br>Healthcare: ${d.healthcare}`);
-    //  });
-
-    // Step 7: Create tooltip in the chart
-    // ==============================
-    //chartGroup.call(toolTip);
-
-    // Step 8: Create event listeners to display and hide the tooltip
-    // ==============================
-    circlesGroup.on("click", function(data) {
-      toolTip.show(data, this);
-    })
-      // onmouseout event
-      .on("mouseout", function(data, index) {
-        toolTip.hide(data);
-      });
+    .attr("fill", "blue")
+    .attr("opacity", ".25");
 
     // Create axes labels
     chartGroup.append("text")
