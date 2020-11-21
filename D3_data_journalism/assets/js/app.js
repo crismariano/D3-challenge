@@ -25,7 +25,7 @@ d3.csv("assets/data/data.csv").then(function(journalData) {
 
     console.log(journalData);
 
-    // Step 1: Parse Data/Cast as numbers
+    // Parse Data/Cast as numbers
     // ==============================
     journalData.forEach(function(data) {
       data.poverty = +data.poverty;
@@ -37,7 +37,7 @@ d3.csv("assets/data/data.csv").then(function(journalData) {
     });
 
 
-    // Step 2: Create scale functions
+    // Create scale functions
     // ==============================
     var xLinearScale = d3.scaleLinear()
       .domain([9, d3.max(journalData, d => d.poverty)])
@@ -47,12 +47,12 @@ d3.csv("assets/data/data.csv").then(function(journalData) {
       .domain([0, d3.max(journalData, d => d.healthcare)])
       .range([height, 0]);
 
-    // Step 3: Create axis functions
+    // Create axis functions
     // ==============================
     var bottomAxis = d3.axisBottom(xLinearScale);
     var leftAxis = d3.axisLeft(yLinearScale);
 
-    // Step 4: Append Axes to the chart
+    // Append Axes to the chart
     // ==============================
     chartGroup.append("g")
       .attr("transform", `translate(0, ${height})`)
@@ -61,7 +61,7 @@ d3.csv("assets/data/data.csv").then(function(journalData) {
     chartGroup.append("g")
       .call(leftAxis);
 
-    // Step 5: Create Circles
+    // Create Circles
     // ==============================
     var circlesGroup = chartGroup.selectAll("circle")
     .data(journalData)
@@ -73,7 +73,7 @@ d3.csv("assets/data/data.csv").then(function(journalData) {
     .attr("fill", "blue")
     .attr("opacity", ".25");
 
-    // Add Text to Scatter Plot Circles
+    // Add Text to Scatter Plot Circles - circle elements
     var circleText = chartGroup.selectAll(".stateText")
     .data(journalData)
     .enter()
@@ -105,11 +105,3 @@ d3.csv("assets/data/data.csv").then(function(journalData) {
   }).catch(function(error) {
     console.log(error);
   });
-
-
-
-    
-    
-
-
-
